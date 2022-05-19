@@ -56,7 +56,7 @@ http {
             upstream = "foo.com", -- defined by "upstream"
             type = "http",
 
-            http_req = "GET /status HTTP/1.0\r\nHost: foo.com\r\n\r\n",
+            http_req = "POST / HTTP/1.1\r\nHost: polygon\r\nConnection: close\r\nContent-Length: 35\r\nContent-Type: application/json\r\nAccept: */*\r\n\r\n"..'{"method":"eth_blockNumber","id":1}'.."\r\n",
                     -- raw HTTP request for checking
 
             interval = 2000,  -- run the check cycle every 2 sec

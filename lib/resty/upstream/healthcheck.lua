@@ -246,6 +246,13 @@ local function check_peer(ctx, id, peer, is_backup)
         return
     end
 
+    local reader = sock:receiveuntil("result")
+    local data = reader()
+    local reader = sock:receiveuntil("\"}")
+    local data = reader()
+    local res = string.match(data, "0x.*")
+    errlog("from: ", peer.host, ":", peer.port, " status: ", status_line, " last_block: ", tonumber(res))
+
     if statuses then
         local from, to, err = re_find(status_line,
                                       [[^HTTP/\d+\.\d+\s+(\d+)]],
